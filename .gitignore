@@ -51,3 +51,7 @@ web_modules/
 *.njsproj
 *.sln
 *.sw?
+
+
+database.db
+migrations
