@@ -1,12 +1,24 @@
+import dotenv from "dotenv";
+dotenv.config();
+import cors from "cors";
+
 // Initializing the Express app
 import express from "express";
 import { createServer } from "http";
 const app = express();
 const api = express.Router();
+
+// Setting up Middleware
+app.use(cors());
 app.use("/api", api);
 app.use(express.json());
 const server = createServer(app);
-const port = 8080;
+let port: number;
+if (process.env.PORT) {
+    port = parseInt(process.env.PORT);
+} else {
+    port = 8080;
+}
 
 server.listen(port, () => {
     console.log(`App started on http://localhost:${port}`);
@@ -57,7 +69,7 @@ api.route("/messages/get").get(async (req, res) => {
     if (typeof req.query.limit === "string") {
         limit = parseInt(req.query.limit);
     } else {
-        limit = 50;
+        limit = 100;
     }
 
     try {

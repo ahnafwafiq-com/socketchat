@@ -7,15 +7,64 @@
         <title>SocketChat</title>
     </head>
     <body>
+        <!-- https://colorhunt.co/palette/331d2c3f2e3ea78295efe1d1 -->
         <div id="app">
-            <ul></ul>
-            <form id="message_form">
-                <label for="text-input"></label>
-                <input type="text" id="text-input" />
-                <button>Send!</button>
-            </form>
-            <div class="status"></div>
+            <div data-messages></div>
+            <div class="fixed">
+                <button onclick="openDialog('[data-optionsDialog]')">
+                    Options
+                </button>
+                <form id="message_form">
+                    <input
+                        type="text"
+                        id="text-input"
+                        placeholder="Message: "
+                        autocomplete="off"
+                        autofocus
+                    />
+                    <button>Send!</button>
+                </form>
+                <div class="status"></div>
+            </div>
+
+            <!-- Dialog elements -->
+            <dialog data-unDialog>
+                <form data-unForm>
+                    <label for="username">Set a Username</label>
+                    <input
+                        data-unInput
+                        type="text"
+                        id="username"
+                        placeholder="Username:"
+                    />
+                    <button type="submit">Set</button>
+                    <div class="unError"></div>
+                    <button onclick="closeDialog('[data-unDialog]')">
+                        Close
+                    </button>
+                </form>
+            </dialog>
+            <dialog data-optionsDialog>
+                <button onclick="openDialog('[data-unDialog]')">
+                    Change Username
+                </button>
+                <label for="theme">Dark Theme: </label>
+                <input type="checkbox" name="theme" id="theme" checked />
+                <button onclick="closeDialog('[data-optionsDialog]')">
+                    Close
+                </button>
+            </dialog>
         </div>
+        <script>
+            const closeDialog = (query) => {
+                const dialog = document.querySelector(query);
+                dialog?.close();
+            };
+            const openDialog = (query) => {
+                const dialog = document.querySelector(query);
+                dialog?.showModal();
+            };
+        </script>
         <script type="module" src="./src/main.ts"></script>
     </body>
 </html>

@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "autolinker": "^4.0.0",
+    "normalize.css": "^8.0.1",
     "socket.io-client": "^4.7.1"
   },
   "devDependencies": {
