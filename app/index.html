@@ -4,12 +4,45 @@
         <meta charset="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="/vite.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="A Simple Group Chat App Built with Socket.io, Express.js,
+        Node.js, Vite, Prisma and Typescript. Users can enter a
+        username and chat with people all arround the globe. The app
+        uses prisma along with sqlite to store the messages."
+        />
+        <link
+            rel="shortcut icon"
+            href="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Socket-io.svg/2048px-Socket-io.svg.png"
+            type="image/x-icon"
+        />
         <title>SocketChat</title>
     </head>
     <body>
-        <!-- https://colorhunt.co/palette/331d2c3f2e3ea78295efe1d1 -->
+        <!-- Color Palllete: https://colorhunt.co/palette/331d2c3f2e3ea78295efe1d1 -->
+        <nav>
+            <h1>SocketChat</h1>
+            <p>By Ahnaf Wafiq</p>
+            <button onclick="openDialog('[data-about]')">About</button>
+            <dialog data-about>
+                <p>
+                    A Simple Group Chat App Built with Socket.io, Express.js,
+                    Node.js, Vite, Prisma and Typescript. Users can enter a
+                    username and chat with people all arround the globe. The app
+                    uses prisma along with sqlite to store the messages.
+                </p>
+                <p>
+                    This Project is Open Source and the Source Code is Available
+                    <a href="https://github.com/ahnafwafiq09/socketio">here</a>
+                </p>
+                <button onclick="closeDialog('[data-about]')">Close</button>
+            </dialog>
+        </nav>
         <div id="app">
-            <div data-messages></div>
+            <div>
+                <div data-messages></div>
+                <div class="scroll"></div>
+            </div>
             <div class="fixed">
                 <button onclick="openDialog('[data-optionsDialog]')">
                     Options
@@ -26,35 +59,32 @@
                 </form>
                 <div class="status"></div>
             </div>
-
-            <!-- Dialog elements -->
-            <dialog data-unDialog>
-                <form data-unForm>
-                    <label for="username">Set a Username</label>
-                    <input
-                        data-unInput
-                        type="text"
-                        id="username"
-                        placeholder="Username:"
-                    />
-                    <button type="submit">Set</button>
-                    <div class="unError"></div>
-                    <button onclick="closeDialog('[data-unDialog]')">
-                        Close
-                    </button>
-                </form>
-            </dialog>
-            <dialog data-optionsDialog>
-                <button onclick="openDialog('[data-unDialog]')">
-                    Change Username
-                </button>
-                <label for="theme">Dark Theme: </label>
-                <input type="checkbox" name="theme" id="theme" checked />
-                <button onclick="closeDialog('[data-optionsDialog]')">
-                    Close
-                </button>
-            </dialog>
         </div>
+        <!-- Dialog elements -->
+        <dialog data-unDialog>
+            <form data-unForm>
+                <label for="username">Set a Username</label>
+                <input
+                    data-unInput
+                    type="text"
+                    id="username"
+                    placeholder="Username:"
+                />
+                <button type="submit" disabled>Set</button>
+                <div class="unError"></div>
+                <button onclick="closeDialog('[data-unDialog]')">Back</button>
+            </form>
+        </dialog>
+        <dialog data-optionsDialog>
+            <button onclick="openDialog('[data-unDialog]')">
+                Change Username
+            </button>
+            <br />
+            <label for="theme">Dark Theme: </label>
+            <input type="checkbox" name="theme" id="theme" checked />
+            <br />
+            <button onclick="closeDialog('[data-optionsDialog]')">Close</button>
+        </dialog>
         <script>
             const closeDialog = (query) => {
                 const dialog = document.querySelector(query);

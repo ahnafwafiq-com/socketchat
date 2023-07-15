@@ -1,7 +1,7 @@
 {
-  "name": "app",
+  "name": "socketio-app",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -17,5 +17,17 @@
     "@types/node": "^20.4.1",
     "typescript": "^5.0.2",
     "vite": "^4.4.0"
-  }
+  },
+  "description": "A Group Chat app built with express.js and Socket.io",
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahnafwafiq09/socketio.git"
+  },
+  "author": "Ahnaf Wafiq",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ahnafwafiq09/socketio/issues"
+  },
+  "homepage": "https://github.com/ahnafwafiq09/socketio#readme"
 }

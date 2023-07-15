@@ -80,4 +80,42 @@ export const getInitialMessages = async () => {
             messages?.appendChild(msg.render());
         }
     }
+    scrollDown();
+};
+
+export const scrollDown = () => {
+    document
+        .querySelector<HTMLDivElement>(".scroll")
+        ?.scrollIntoView({ behavior: "smooth" });
+};
+
+export const validateUesrname = (username: string) => {
+    const pattern = /^[a-z0-9._-]+$/;
+
+    const response: {
+        error: boolean;
+        message: string;
+    } = {
+        error: false,
+        message: "",
+    };
+
+    if (!username) {
+        response.message = "Provide a username";
+        response.error = true;
+    } else if (username.length < 3) {
+        response.message = "Username must be longer than 3 characters";
+        response.error = true;
+    } else if (username.includes(" ")) {
+        response.message = "Username must not contain spaces";
+        response.error = true;
+    } else if (!pattern.test(username)) {
+        response.message =
+            "Username must not contain special characters other than ., -, and _";
+        response.error = true;
+    } else {
+        response.message = "";
+        response.error = false;
+    }
+    return response;
 };

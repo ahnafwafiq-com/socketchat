@@ -13,6 +13,8 @@ import {
     getInitialMessages,
     unError,
     unSubmit,
+    scrollDown,
+    validateUesrname,
 } from "./dom";
 
 getInitialMessages();
@@ -51,27 +53,43 @@ if (username_input) {
 
 username_form?.addEventListener("submit", (e: SubmitEvent) => {
     e.preventDefault();
-    const newUsername = username_input?.value;
-    if (newUsername) {
-        localStorage.setItem("username", newUsername);
+    if (unError && unSubmit && username_input) {
+        if (!username_input.value) {
+            unError.innerText = "Please provide a username";
+            unSubmit.disabled = true;
+            return;
+        }
+        const validation = validateUesrname(username_input.value);
+        if (validation.error) {
+            unError.innerText = validation.message;
+            unSubmit.disabled = true;
+            return;
+        } else {
+            const newUsername = username_input?.value;
+            if (newUsername) {
+                localStorage.setItem("username", newUsername);
+            }
+            usernameDialog?.close();
+        }
     }
-    usernameDialog?.close();
 });
 
 // Validating provided username
 username_input?.addEventListener("change", () => {
     if (unError && unSubmit && username_input) {
-        if (!username_input?.value) {
-            unError.innerText = "Provide a username";
-        } else if (username_input.value.length < 3) {
-            unError.innerText = "Username must be longer than 3 characters";
+        if (!username_input.value) {
+            unError.innerText = "Please provide a username";
             unSubmit.disabled = true;
-        } else if (username_input.value.length >= 3) {
+            return;
+        }
+        const validation = validateUesrname(username_input.value);
+        if (validation.error) {
+            unError.innerText = validation.message;
+            unSubmit.disabled = true;
+            return;
+        } else {
             unError.innerText = "";
             unSubmit.disabled = false;
-        } else if (username_input.value.includes(" ")) {
-            unError.innerText = "Username cannot contain spaces";
-            unSubmit.disabled = true;
         }
     }
 });
@@ -93,4 +111,5 @@ send_message?.addEventListener("submit", (e: SubmitEvent) => {
 socket.on("message", (message, username) => {
     const newMessage = new Message(message, username);
     messages?.appendChild(newMessage.render());
+    scrollDown();
 });

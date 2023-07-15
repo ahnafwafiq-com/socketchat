@@ -9,7 +9,12 @@ const app = express();
 const api = express.Router();
 
 // Setting up Middleware
-app.use(cors());
+
+app.use(
+    cors({
+        origin: ["https://socketio.ahnafwafiq.com", "http://localhost:5173"],
+    })
+);
 app.use("/api", api);
 app.use(express.json());
 const server = createServer(app);
@@ -28,7 +33,7 @@ server.listen(port, () => {
 import { Server } from "socket.io";
 const io = new Server(server, {
     cors: {
-        origin: ["http://localhost:5173"],
+        origin: ["http://localhost:5173", "https://socketio.ahnafwafiq.com"],
     },
 });
 
@@ -49,10 +54,8 @@ io.on("connection", (socket) => {
     });
 });
 
-app.get("/", (req, res) => {
-    res.status(200).send(
-        'This is the API route. Visit <a href="http://localhost:5173">http://localhost:5173</a> to join the group chat.'
-    );
+app.get("/", (_, res) => {
+    res.redirect("https://socketio.ahnafwafiq.com/");
 });
 
 api.route("/messages/get").get(async (req, res) => {
