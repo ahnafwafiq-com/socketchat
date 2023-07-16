@@ -2,24 +2,32 @@ import Autolinker from "autolinker";
 
 // Getting the DOM elements using querySelectors
 
-export const text_input =
-    document.querySelector<HTMLInputElement>("#text-input");
-export const unError = document.querySelector<HTMLDivElement>(".unError");
-export const send_message =
-    document.querySelector<HTMLFormElement>("#message_form");
-export const messages =
-    document.querySelector<HTMLDivElement>("[data-messages]");
-export const status = document.querySelector<HTMLDivElement>(".status");
-export const username_input =
-    document.querySelector<HTMLInputElement>("#username");
-export const username_form =
-    document.querySelector<HTMLFormElement>("[data-unForm]");
-export const optionsDialog = document.querySelector<HTMLDialogElement>(
-    "[data-optionsDialog]"
-);
+// Creating a simple function to reduce the code
+const selectDiv = (query: string) => {
+    return document.querySelector<HTMLDivElement>(query);
+};
 
-export const usernameDialog =
-    document.querySelector<HTMLDialogElement>("[data-unDialog]");
+const selectDialog = (query: string) => {
+    return document.querySelector<HTMLDialogElement>(query);
+};
+
+const selectForm = (query: string) => {
+    return document.querySelector<HTMLFormElement>(query);
+};
+
+const selectInput = (query: string) => {
+    return document.querySelector<HTMLInputElement>(query);
+};
+
+export const text_input = selectInput("#text-input");
+export const unError = selectDiv(".unError");
+export const send_message = selectForm("#message_form");
+export const messages = selectDiv("[data-messages]");
+export const status = selectDiv(".status");
+export const username_input = selectInput("#username");
+export const username_form = selectForm("[data-unForm]");
+export const optionsDialog = selectDialog("[data-optionsDialog]");
+export const usernameDialog = selectDialog("[data-unDialog]");
 export const unSubmit =
     usernameDialog?.querySelector<HTMLButtonElement>('[type="submit"]');
 
@@ -70,6 +78,9 @@ export class Message implements Message_t {
 }
 
 export const getInitialMessages = async () => {
+    if (messages) {
+        messages.innerHTML = "";
+    }
     const response = await fetch("http://localhost:8080/api/messages/get");
     console.log(response);
     const data = await response.json();
@@ -111,7 +122,7 @@ export const validateUesrname = (username: string) => {
         response.error = true;
     } else if (!pattern.test(username)) {
         response.message =
-            "Username must not contain special characters other than ., -, and _";
+            "Username can only contain characters a-z, numbers 0-9 and characters ., - and _";
         response.error = true;
     } else {
         response.message = "";

@@ -59,30 +59,31 @@ username_form?.addEventListener("submit", (e: SubmitEvent) => {
             unSubmit.disabled = true;
             return;
         }
-        const validation = validateUesrname(username_input.value);
+        const validation = validateUesrname(username_input.value.toLowerCase());
         if (validation.error) {
             unError.innerText = validation.message;
             unSubmit.disabled = true;
             return;
         } else {
-            const newUsername = username_input?.value;
+            const newUsername = username_input?.value.toLowerCase();
             if (newUsername) {
                 localStorage.setItem("username", newUsername);
             }
             usernameDialog?.close();
         }
     }
+    getInitialMessages();
 });
 
 // Validating provided username
-username_input?.addEventListener("change", () => {
+username_input?.addEventListener("keyup", () => {
     if (unError && unSubmit && username_input) {
         if (!username_input.value) {
             unError.innerText = "Please provide a username";
             unSubmit.disabled = true;
             return;
         }
-        const validation = validateUesrname(username_input.value);
+        const validation = validateUesrname(username_input.value.toLowerCase());
         if (validation.error) {
             unError.innerText = validation.message;
             unSubmit.disabled = true;

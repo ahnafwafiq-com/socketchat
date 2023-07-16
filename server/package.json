@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "A Group chat app with Socket.io and Express.js",
   "main": "app.js",
+  "engines": {
+    "node": "18.x"
+  },
   "type": "module",
   "scripts": {
     "prebuild": "rimraf dist && npx prisma migrate deploy && npx prisma generate",
-    "build": "npm run prebuild and tsc",
+    "build": "npm run prebuild && tsc",
     "start": "node dist/app.js",
     "dev": "concurrently \"tsc -w\" \"nodemon dist/app.js\""
   },
