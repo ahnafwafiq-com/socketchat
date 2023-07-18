@@ -44,13 +44,15 @@ const db = new PrismaClient();
 io.on("connection", (socket) => {
     console.log(`User ${socket.id} Connected`);
     socket.on("message", async (message, username) => {
-        io.emit("message", message, username);
-        await db.message.create({
-            data: {
-                message: message,
-                sentBy: username,
-            },
-        });
+        if (message && username) {
+            io.emit("message", message, username);
+            await db.message.create({
+                data: {
+                    message: message,
+                    sentBy: username,
+                },
+            });
+        }
     });
 });
 
