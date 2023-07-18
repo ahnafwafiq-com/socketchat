@@ -4,6 +4,9 @@
   "description": "A Group chat app with Socket.io and Express.js",
   "main": "app.js",
   "type": "module",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "prebuild": "rimraf dist && npx prisma migrate deploy && npx prisma generate",
     "build": "npm run prebuild && tsc",
