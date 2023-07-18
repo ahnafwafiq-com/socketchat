@@ -15,6 +15,13 @@ body {
     overflow-y: none;
 }
 
+dialog {
+    background-color: var(--color-four);
+    color: var(--color-one);
+    width: clamp(100px, 100vw, 500px);
+    border-radius: 15px;
+}
+
 #app {
     margin-left: auto;
     margin-right: auto;
@@ -65,7 +72,8 @@ body {
 
 input {
     color: var(--color-one);
-    background-color: var(--color-four);
+    background-color: #fff;
+    border-radius: 5px;
 }
 
 input::placeholder {
@@ -79,7 +87,7 @@ input::placeholder {
 }
 
 #text-input {
-    width: calc(clamp(100px, 100vw, 500px) - 70px);
+    width: calc(clamp(100px, 100vw, 500px) - 95px);
     border-radius: 15px;
     padding: 5px;
     height: 30px;
@@ -93,9 +101,9 @@ input::placeholder {
     width: 60px;
     height: 40px;
     background-color: var(--color-one);
-    border: 0.1px solid var(--color-three);
+    border: 1px solid var(--color-four);
     outline: 0;
-    color: var(--color-three);
+    color: var(--color-four);
     border-radius: 15px;
 }
 
@@ -105,25 +113,25 @@ input::placeholder {
 
 /* Link Styles */
 
-main a {
+a {
     color: var(--color-four);
     font-weight: 400;
     position: relative;
 }
 
-main a:checked {
+a:checked {
     color: var(--color-one);
 }
 
-main a::after {
+a::after {
     content: "";
     position: absolute;
     top: 50%;
     right: -20px;
     transform: translateY(-50%);
     opacity: 0;
-    width: 20px;
-    height: 20px;
+    width: 17px;
+    height: 17px;
     background-image: url("../public/external-link-message.svg");
     background-size: contain;
     background-repeat: no-repeat;
@@ -131,7 +139,7 @@ main a::after {
     filter: hue-rotate(34deg);
 }
 
-main a:hover::after {
+a:hover::after {
     opacity: 1;
 }
 
@@ -164,30 +172,48 @@ h1 {
     margin-left: auto;
 }
 
+.appTitle:hover {
+    cursor: pointer;
+}
+
 .fixedShadow {
     z-index: 69;
     position: fixed;
     left: 50%;
+    box-shadow: 0 40px 40px rgba(51, 29, 44, 0.8);
     transform: translateX(-50%);
     width: 100vw;
     background-color: var(--color-one);
 }
 
-nav [data-aboutButton] {
-    position: relative;
-    left: 50%;
-    margin-top: 10px;
-    transform: translateX(-50%);
-    width: 100px;
-    border-radius: 10px;
-    background-color: var(--color-one);
-    font-size: 1.1rem;
-    padding: 5px;
-    outline: 0;
-    color: var(--color-four);
-    border: 1px solid var(--color-four);
+.block {
+    width: 50px;
+    height: 100px;
+    display: block;
 }
 
-[data-aboutButton]:hover {
-    background-color: var(--color-two);
+button:hover {
+    cursor: pointer;
+}
+
+dialog button:hover {
+    background-color: #d7cbbc;
+}
+
+dialog button {
+    border: 1px solid var(--color-one);
+    border-radius: 5px;
+    color: var(--color-one);
+    background-color: #f7f0e8;
+    padding: 6px 12px;
+}
+
+[data-unDialog] input {
+    padding: 6px 12px;
+    border: 1px solid var(--color-one);
+}
+
+[data-unDialog] input:focus {
+    outline: 0;
+    outline: 1.3px solid var(--color-one);
 }

@@ -22,7 +22,7 @@ let port: number;
 if (process.env.PORT) {
     port = parseInt(process.env.PORT);
 } else {
-    port = 8080;
+    port = 443;
 }
 
 server.listen(port, () => {

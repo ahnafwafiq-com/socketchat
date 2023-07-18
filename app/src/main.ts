@@ -103,6 +103,10 @@ send_message?.addEventListener("submit", (e: SubmitEvent) => {
             text_input?.value,
             localStorage.getItem("username")
         );
+    } else if (!localStorage.getItem("username")) {
+        document
+            .querySelector<HTMLDialogElement>("[data-unWarning]")
+            ?.showModal();
     }
     if (text_input) {
         text_input.value = "";

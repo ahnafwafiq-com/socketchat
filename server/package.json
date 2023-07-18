@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "A Group chat app with Socket.io and Express.js",
   "main": "app.js",
-  "engines": {
-    "node": "18.x"
-  },
   "type": "module",
   "scripts": {
     "prebuild": "rimraf dist && npx prisma migrate deploy && npx prisma generate",

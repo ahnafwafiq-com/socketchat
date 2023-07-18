@@ -22,13 +22,10 @@
         <!-- Color Palllete: https://colorhunt.co/palette/331d2c3f2e3ea78295efe1d1 -->
         <nav>
             <div class="fixedShadow">
-                <div class="appTitle">
+                <div class="appTitle" onclick="openDialog('[data-about]')">
                     <h1>SocketChat</h1>
                     <div>By Ahnaf Wafiq</div>
                 </div>
-                <button onclick="openDialog('[data-about]')" data-aboutButton>
-                    About
-                </button>
             </div>
             <dialog data-about>
                 <p>
@@ -46,61 +43,70 @@
                         >here</a
                     >
                 </p>
+                <p>
+                    Developer Info:
+                    <a href="https://linktr.ee/ahnafwafiq" target="_blank"
+                        >Click here to learn more</a
+                    >
+                </p>
                 <button onclick="closeDialog('[data-about]')">Close</button>
             </dialog>
         </nav>
-        <main>
-            <div id="app">
-                <div>
-                    <div data-messages></div>
-                    <div class="scroll"></div>
-                </div>
-                <div class="fixed">
-                    <button
-                        onclick="openDialog('[data-optionsDialog]')"
-                        data-optionsButton
-                    >
-                        Options
-                    </button>
-                    <form id="message_form">
-                        <input
-                            type="text"
-                            id="text-input"
-                            placeholder="Message: "
-                            autocomplete="off"
-                            autofocus
-                        />
-                        <button data-sendMessage>Send!</button>
-                    </form>
-                </div>
+        <div id="app">
+            <div>
+                <div class="block"></div>
+                <div data-messages></div>
+                <div class="scroll"></div>
             </div>
-            <!-- Dialog elements -->
-            <dialog data-unDialog>
-                <form data-unForm>
-                    <label for="username">Set a Username</label>
+            <div class="fixed">
+                <button
+                    onclick="openDialog('[data-optionsDialog]')"
+                    data-optionsButton
+                >
+                    Options
+                </button>
+                <form id="message_form">
                     <input
-                        data-unInput
                         type="text"
-                        id="username"
-                        placeholder="Username:"
+                        id="text-input"
+                        placeholder="Message: "
+                        autocomplete="off"
+                        autofocus
                     />
-                    <button type="submit" disabled>Set</button>
-                    <div class="unError"></div>
-                    <button onclick="closeDialog('[data-unDialog]')">
-                        Back
-                    </button>
+                    <button data-sendMessage>Send!</button>
                 </form>
-            </dialog>
-            <dialog data-optionsDialog>
-                <button onclick="openDialog('[data-unDialog]')">
-                    Change Username
-                </button>
-                <button onclick="closeDialog('[data-optionsDialog]')">
-                    Close
-                </button>
-                <div class="status"></div>
-            </dialog>
-        </main>
+            </div>
+        </div>
+        <!-- Dialog elements -->
+        <dialog data-unDialog>
+            <form data-unForm>
+                <label for="username">Set a Username: </label>
+                <input
+                    data-unInput
+                    type="text"
+                    id="username"
+                    placeholder="Username:"
+                />
+                <button type="submit" disabled>Set</button>
+                <div class="unError"></div>
+            </form>
+            <button onclick="closeDialog('[data-unDialog]')">Back</button>
+        </dialog>
+        <dialog data-optionsDialog>
+            <button onclick="openDialog('[data-unDialog]')">
+                Change Username
+            </button>
+            <button onclick="openDialog('[data-about]')">About this App</button>
+            <button onclick="closeDialog('[data-optionsDialog]')">Close</button>
+            <div class="status"></div>
+        </dialog>
+        <dialog data-unWarning>
+            <p>You must enter a username to send messages</p>
+            <button onclick="openDialog('[data-unDialog]')">
+                Set Username
+            </button>
+            <button onclick="closeDialog('[data-unWarning]')">Close</button>
+        </dialog>
         <script>
             const closeDialog = (query) => {
                 const dialog = document.querySelector(query);
