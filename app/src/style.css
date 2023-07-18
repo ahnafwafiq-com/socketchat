@@ -12,6 +12,7 @@ body {
     color: var(--color-four);
     background-color: var(--color-one);
     scroll-behavior: smooth;
+    overflow-y: none;
 }
 
 #app {
@@ -21,16 +22,45 @@ body {
     height: 100vh;
 }
 
+[data-messages] {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 .message {
     width: 200px;
     background-color: var(--color-two);
     border-radius: 5px;
     border: 0.1px solid var(--color-three);
     padding: 7px;
+    margin-bottom: 5px;
     position: relative;
 }
+
 .message.sentByCurrentUser {
     text-align: right;
+    align-self: flex-end;
+}
+
+.messageUsername {
+    font-weight: 700;
+    font-size: 110%;
+    color: var(--color-three);
+}
+
+[data-optionsButton] {
+    border: 0.1px solid var(--color-four);
+    padding: 10px;
+    border-radius: calc(1.1rem / 2);
+    outline: 0;
+    background-color: var(--color-one);
+    font-size: 1.1rem;
+    color: var(--color-four);
+}
+
+[data-optionsButton]:hover {
+    background-color: var(--color-two);
 }
 
 input {
@@ -48,14 +78,8 @@ input::placeholder {
     bottom: 0;
 }
 
-.messageUsername {
-    font-weight: 700;
-    font-size: 110%;
-    color: var(--color-three);
-}
-
 #text-input {
-    width: 50%;
+    width: calc(clamp(100px, 100vw, 500px) - 70px);
     border-radius: 15px;
     padding: 5px;
     height: 30px;
@@ -65,17 +89,33 @@ input::placeholder {
     outline: none;
 }
 
-a {
+[data-sendMessage] {
+    width: 60px;
+    height: 40px;
+    background-color: var(--color-one);
+    border: 0.1px solid var(--color-three);
+    outline: 0;
+    color: var(--color-three);
+    border-radius: 15px;
+}
+
+[data-sendMessage]:hover {
+    background-color: var(--color-two);
+}
+
+/* Link Styles */
+
+main a {
     color: var(--color-four);
     font-weight: 400;
     position: relative;
 }
 
-a:checked {
+main a:checked {
     color: var(--color-one);
 }
 
-a::after {
+main a::after {
     content: "";
     position: absolute;
     top: 50%;
@@ -91,17 +131,8 @@ a::after {
     filter: hue-rotate(34deg);
 }
 
-a:hover::after path {
-    fill: var(--color-four);
-}
-
-a:hover::after {
+main a:hover::after {
     opacity: 1;
-}
-
-.scroll {
-    width: 100%;
-    height: 100px;
 }
 
 nav a {
@@ -114,4 +145,49 @@ nav a::after {
 
 nav dialog {
     background-color: var(--color-four);
+}
+
+.scroll {
+    width: 100%;
+    height: 100px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 2px !important;
+}
+
+.appTitle {
+    width: 180px;
+    text-align: right;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.fixedShadow {
+    z-index: 69;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    background-color: var(--color-one);
+}
+
+nav [data-aboutButton] {
+    position: relative;
+    left: 50%;
+    margin-top: 10px;
+    transform: translateX(-50%);
+    width: 100px;
+    border-radius: 10px;
+    background-color: var(--color-one);
+    font-size: 1.1rem;
+    padding: 5px;
+    outline: 0;
+    color: var(--color-four);
+    border: 1px solid var(--color-four);
+}
+
+[data-aboutButton]:hover {
+    background-color: var(--color-two);
 }

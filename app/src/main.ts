@@ -31,7 +31,7 @@ document.addEventListener("keyup", (e: KeyboardEvent) => {
 const socket = io("http://localhost:8080");
 socket.on("connect", () => {
     if (status) {
-        status.innerText = `Connected as user ${socket.id}`;
+        status.innerText = `Connected with server as id "${socket.id}"`;
     }
 });
 

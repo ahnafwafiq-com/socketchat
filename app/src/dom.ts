@@ -82,9 +82,7 @@ export const getInitialMessages = async () => {
         messages.innerHTML = "";
     }
     const response = await fetch("http://localhost:8080/api/messages/get");
-    console.log(response);
     const data = await response.json();
-    console.log(data);
     if (!data.error) {
         for (let message of data.messages) {
             const msg = new Message(message.message, message.sentBy);

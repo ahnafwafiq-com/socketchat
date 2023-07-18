@@ -21,70 +21,86 @@
     <body>
         <!-- Color Palllete: https://colorhunt.co/palette/331d2c3f2e3ea78295efe1d1 -->
         <nav>
-            <h1>SocketChat</h1>
-            <p>By Ahnaf Wafiq</p>
-            <button onclick="openDialog('[data-about]')">About</button>
+            <div class="fixedShadow">
+                <div class="appTitle">
+                    <h1>SocketChat</h1>
+                    <div>By Ahnaf Wafiq</div>
+                </div>
+                <button onclick="openDialog('[data-about]')" data-aboutButton>
+                    About
+                </button>
+            </div>
             <dialog data-about>
                 <p>
-                    A Simple Group Chat App Built with Socket.io, Express.js,
-                    Node.js, Vite, Prisma and Typescript. Users can enter a
-                    username and chat with people all arround the globe. The app
-                    uses prisma along with sqlite to store the messages.
+                    A simple group chat app built by Ahnaf Wafiq. The app
+                    leverages Web Socket connections to deliver instant
+                    messaging experience. Users can enter in a username and chat
+                    in this global group chat. Messages are stored and delivered
+                    securely with powerful API and Database.
                 </p>
                 <p>
                     This Project is Open Source and the Source Code is Available
-                    <a href="https://github.com/ahnafwafiq09/socketio">here</a>
+                    <a
+                        href="https://github.com/ahnafwafiq09/socketio"
+                        target="_blank"
+                        >here</a
+                    >
                 </p>
                 <button onclick="closeDialog('[data-about]')">Close</button>
             </dialog>
         </nav>
-        <div id="app">
-            <div>
-                <div data-messages></div>
-                <div class="scroll"></div>
+        <main>
+            <div id="app">
+                <div>
+                    <div data-messages></div>
+                    <div class="scroll"></div>
+                </div>
+                <div class="fixed">
+                    <button
+                        onclick="openDialog('[data-optionsDialog]')"
+                        data-optionsButton
+                    >
+                        Options
+                    </button>
+                    <form id="message_form">
+                        <input
+                            type="text"
+                            id="text-input"
+                            placeholder="Message: "
+                            autocomplete="off"
+                            autofocus
+                        />
+                        <button data-sendMessage>Send!</button>
+                    </form>
+                </div>
             </div>
-            <div class="fixed">
-                <button onclick="openDialog('[data-optionsDialog]')">
-                    Options
-                </button>
-                <form id="message_form">
+            <!-- Dialog elements -->
+            <dialog data-unDialog>
+                <form data-unForm>
+                    <label for="username">Set a Username</label>
                     <input
+                        data-unInput
                         type="text"
-                        id="text-input"
-                        placeholder="Message: "
-                        autocomplete="off"
-                        autofocus
+                        id="username"
+                        placeholder="Username:"
                     />
-                    <button>Send!</button>
+                    <button type="submit" disabled>Set</button>
+                    <div class="unError"></div>
+                    <button onclick="closeDialog('[data-unDialog]')">
+                        Back
+                    </button>
                 </form>
+            </dialog>
+            <dialog data-optionsDialog>
+                <button onclick="openDialog('[data-unDialog]')">
+                    Change Username
+                </button>
+                <button onclick="closeDialog('[data-optionsDialog]')">
+                    Close
+                </button>
                 <div class="status"></div>
-            </div>
-        </div>
-        <!-- Dialog elements -->
-        <dialog data-unDialog>
-            <form data-unForm>
-                <label for="username">Set a Username</label>
-                <input
-                    data-unInput
-                    type="text"
-                    id="username"
-                    placeholder="Username:"
-                />
-                <button type="submit" disabled>Set</button>
-                <div class="unError"></div>
-                <button onclick="closeDialog('[data-unDialog]')">Back</button>
-            </form>
-        </dialog>
-        <dialog data-optionsDialog>
-            <button onclick="openDialog('[data-unDialog]')">
-                Change Username
-            </button>
-            <br />
-            <label for="theme">Dark Theme: </label>
-            <input type="checkbox" name="theme" id="theme" checked />
-            <br />
-            <button onclick="closeDialog('[data-optionsDialog]')">Close</button>
-        </dialog>
+            </dialog>
+        </main>
         <script>
             const closeDialog = (query) => {
                 const dialog = document.querySelector(query);
