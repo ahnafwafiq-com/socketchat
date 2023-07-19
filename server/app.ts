@@ -12,7 +12,7 @@ const api = express.Router();
 
 app.use(
     cors({
-        origin: ["https://socketio.ahnafwafiq.com", "http://localhost:5173"],
+        origin: ["https://socketio.ahnafwafiq.com"],
     })
 );
 app.use("/api", api);
@@ -33,7 +33,7 @@ server.listen(port, () => {
 import { Server } from "socket.io";
 const io = new Server(server, {
     cors: {
-        origin: ["http://localhost:5173", "https://socketio.ahnafwafiq.com"],
+        origin: ["https://socketio.ahnafwafiq.com"],
     },
 });
 
@@ -94,4 +94,8 @@ api.route("/messages/get").get(async (req, res) => {
 
     res.status(200).send(response);
     return;
+});
+
+app.use((_, res) => {
+    res.status(200).sendFile("./404.html");
 });
