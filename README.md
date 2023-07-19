@@ -8,10 +8,9 @@ A simple group chat app that allows users to enter a username and send messages 
 
 ### Test the app live
 
-Use any of the links below to test the app:
+Use the link below to test the app:
 
 [https://socketio.ahnafwafiq.com]()
-[https://api.socketio.ahnafwafiq.com]()
 
 ### Test the code locally
 
@@ -21,7 +20,17 @@ The main api is protected by CORS policy and can only recieve requests from veri
 ~$ git clone -b testing https://github.com/ahnafwafiq09/socketio.git
 ```
 
-The `main.ts` file inside the [app](https://github.com/ahnafwafiq09/socketio/tree/main/app) directory will have the Socket.io and API endpoints set to http://localhost:8080. The `app.ts` file inside the [server](https://github.com/ahnafwafiq09/socketio/tree/main/server) directory will also include CORS headers for https://localhost:5173 . The Prisma database will also be set the sqlite. The production version of the app uses remote MySQL. You need to add a .env file and add the `DATABASE_URL` environment variable with the value of `file:./[filename].db` . If you've done these properly, you'll have to run the following command from both the [app](https://github.com/ahnafwafiq09/socketio/tree/main/app) and [server](https://github.com/ahnafwafiq09/socketio/tree/main/server) directories.
+The `main.ts` file inside the [app](https://github.com/ahnafwafiq09/socketio/tree/main/app) directory will have the Socket.io and API endpoints set to http://localhost:8080. The `app.ts` file inside the [server](https://github.com/ahnafwafiq09/socketio/tree/main/server) directory will also include CORS headers for https://localhost:5173 . The Prisma database will also be set the sqlite. Feel free to change it to your prefered database. The production version of the app uses remote MySQL. You need to add a .env file and add the `DATABASE_URL` environment variable with the value of `file:./[filename].db` . Also run the two following commands to sync the database with your schema.
+
+```shell
+~$ npx prisma migrate dev --name init
+```
+
+```shell
+~$ npx prisma generate
+```
+
+If you've done these properly, you'll have to run the following command from both the [app](https://github.com/ahnafwafiq09/socketio/tree/main/app) and [server](https://github.com/ahnafwafiq09/socketio/tree/main/server) directories.
 
 ```shell
 app$ npm run dev
