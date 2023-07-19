@@ -81,9 +81,7 @@ export const getInitialMessages = async () => {
     if (messages) {
         messages.innerHTML = "";
     }
-    const response = await fetch(
-        "https://api.socketio.ahnafwafiq.com/api/messages/get"
-    );
+    const response = await fetch("http://localhost:8080/api/messages/get");
     const data = await response.json();
     if (!data.error) {
         for (let message of data.messages) {

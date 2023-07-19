@@ -12,7 +12,7 @@ const api = express.Router();
 
 app.use(
     cors({
-        origin: ["https://socketio.ahnafwafiq.com", "http://localhost:5173"],
+        origin: ["http://localhost:5173"],
     })
 );
 app.use("/api", api);
@@ -22,7 +22,7 @@ let port: number;
 if (process.env.PORT) {
     port = parseInt(process.env.PORT);
 } else {
-    port = 443;
+    port = 8080;
 }
 
 server.listen(port, () => {
@@ -33,7 +33,7 @@ server.listen(port, () => {
 import { Server } from "socket.io";
 const io = new Server(server, {
     cors: {
-        origin: ["http://localhost:5173", "https://socketio.ahnafwafiq.com"],
+        origin: ["http://localhost:5173"],
     },
 });
 
@@ -57,7 +57,7 @@ io.on("connection", (socket) => {
 });
 
 app.get("/", (_, res) => {
-    res.redirect("https://socketio.ahnafwafiq.com/");
+    res.redirect("http://localhost:5173");
 });
 
 api.route("/messages/get").get(async (req, res) => {
@@ -94,4 +94,8 @@ api.route("/messages/get").get(async (req, res) => {
 
     res.status(200).send(response);
     return;
+});
+
+app.use((_, res) => {
+    res.status(200).sendFile("./404.html");
 });

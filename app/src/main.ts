@@ -28,7 +28,7 @@ document.addEventListener("keyup", (e: KeyboardEvent) => {
 });
 
 // Socket IO Connection
-const socket = io("https://api.socketio.ahnafwafiq.com");
+const socket = io("http://localhost:8080");
 socket.on("connect", () => {
     if (status) {
         status.innerText = `Connected with server as id "${socket.id}"`;
